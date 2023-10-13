@@ -2,10 +2,15 @@
 
 public class PlanèteToroïdale : IPlanète
 {
-    public PlanèteToroïdale(uint taille){}
+    private readonly int _taille;
+
+    public PlanèteToroïdale(uint taille)
+    {
+        _taille = (int) taille;
+    }
 
     public (int Latitude, int Longitude) Canoniser(int latitude, int longitude)
     {
-        return (0, 0);
+        return (latitude % _taille, longitude % _taille);
     }
 }
