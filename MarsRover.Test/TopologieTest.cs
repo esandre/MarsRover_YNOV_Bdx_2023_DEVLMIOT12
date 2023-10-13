@@ -4,17 +4,32 @@ namespace MarsRover.Test;
 
 public class TopologieTest
 {
-    // Planète 0 impossible
+    [Fact]
+    public void PlaneteZero()
+    {
+        // QUAND on instancie une planète toroïdale de taille 0
+        // ReSharper disable once ObjectCreationAsStatement
+        void Act() => new PlanèteToroïdale(0);
+
+        // ALORS une exception est lancée
+        Assert.Throws<ArgumentOutOfRangeException>(Act);
+    }
+
+    public static IEnumerable<object[]> CasPlaneteAvancerBoucle
+        => new CartesianData(new[] { 1, 2 }, TestPrimitives.PointsCardinaux);
 
     [Theory]
-    [InlineData(1)]
-    public void PlaneteAvancerBoucle(ushort taille)
+    [MemberData(nameof(CasPlaneteAvancerBoucle))]
+    public void PlaneteAvancerBoucle(ushort taille, PointCardinal orientation)
     {
         // ETANT DONNE une planète de taille <taille>
         var planète = new PlanèteToroïdale(taille);
 
         // ET un rover
-        var rover = new RoverBuilder().SurLaPlanète(planète).Build();
+        var rover = new RoverBuilder()
+            .SurLaPlanète(planète)
+            .Orienté(orientation)
+            .Build();
 
         // QUAND on avance <taille> fois
         var étatFinal = rover;
@@ -27,13 +42,8 @@ public class TopologieTest
         Assert.Equal(rover.Orientation, étatFinal.Orientation);
     }
 
-    public static IEnumerable<object[]> CasPlaneteAvancer => new[]
-    {
-        new object[] { 2, PointCardinal.Est },
-        new object[] { 2, PointCardinal.Sud },
-        new object[] { 2, PointCardinal.Ouest },
-        new object[] { 2, PointCardinal.Nord },
-    };
+    public static IEnumerable<object[]> CasPlaneteAvancer => CasPlaneteAvancerBoucle
+        .Where(cas => (int) cas[0] > 1);
 
     [Theory]
     [MemberData(nameof(CasPlaneteAvancer))]

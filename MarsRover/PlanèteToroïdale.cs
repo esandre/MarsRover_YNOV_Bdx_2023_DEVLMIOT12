@@ -6,6 +6,8 @@ public class PlanèteToroïdale : IPlanète
 
     public PlanèteToroïdale(uint taille)
     {
+        if (taille == 0) throw new ArgumentOutOfRangeException(nameof(taille));
+
         _taille = (int) taille;
     }
 
