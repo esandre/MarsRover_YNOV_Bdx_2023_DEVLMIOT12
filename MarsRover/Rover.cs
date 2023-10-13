@@ -2,17 +2,21 @@
 
 public class Rover
 {
-    private readonly PointCardinal _orientationDépart;
-
     public Rover(PointCardinal orientationDépart)
     {
-        _orientationDépart = orientationDépart;
+        Orientation = orientationDépart;
     }
 
     public Rover TournerADroite()
     {
-        return new Rover(_orientationDépart == PointCardinal.Nord ? PointCardinal.Est : PointCardinal.Sud);
+        if(Orientation == PointCardinal.Nord)
+            return new Rover(PointCardinal.Est);
+
+        if (Orientation == PointCardinal.Est)
+            return new Rover(PointCardinal.Sud);
+
+        return new Rover(PointCardinal.Ouest);
     }
 
-    public PointCardinal Orientation => _orientationDépart;
+    public PointCardinal Orientation { get; }
 }
