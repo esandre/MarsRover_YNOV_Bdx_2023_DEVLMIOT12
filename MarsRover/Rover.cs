@@ -7,19 +7,7 @@ public class Rover
         Orientation = orientationDépart;
     }
 
-    public Rover TournerADroite()
-    {
-        if(Orientation == PointCardinal.Nord)
-            return new Rover(PointCardinal.Est);
-
-        if (Orientation == PointCardinal.Est)
-            return new Rover(PointCardinal.Sud);
-
-        if (Orientation == PointCardinal.Ouest)
-            return new Rover(PointCardinal.Nord);
-
-        return new Rover(PointCardinal.Ouest);
-    }
+    public Rover TournerADroite() => new(Orientation.SuivantHoraire);
 
     public PointCardinal Orientation { get; }
 }

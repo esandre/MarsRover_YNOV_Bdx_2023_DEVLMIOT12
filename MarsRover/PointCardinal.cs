@@ -9,6 +9,24 @@ public class PointCardinal
     public static PointCardinal Ouest { get; } = new (nameof(Ouest));
     public static PointCardinal Sud { get; } = new (nameof(Sud));
 
+    public PointCardinal SuivantHoraire
+    {
+        get
+        {
+
+            if (this == Nord)
+                return Est;
+
+            if (this == Est)
+                return Sud;
+
+            if (this == Ouest)
+                return Nord;
+
+            return Ouest;
+        }
+    }
+
     private PointCardinal(string nom)
     {
         _nom = nom;
