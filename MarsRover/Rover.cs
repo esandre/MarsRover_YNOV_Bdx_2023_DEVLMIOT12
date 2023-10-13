@@ -3,31 +3,35 @@
 public class Rover
 {
     private readonly IPlanète _planète;
-    public PointCardinal Orientation { get; }
-    public int Latitude { get; }
-    public int Longitude { get; }
+    private readonly Point _coordonnées;
 
-    public Rover(PointCardinal orientationDépart, IPlanète planète, int latitude = 0, int longitude = 0)
+    public PointCardinal Orientation { get; }
+
+    public int Latitude => _coordonnées.X;
+    public int Longitude => _coordonnées.Y;
+
+    public Rover(PointCardinal orientation, IPlanète planète)
     {
         _planète = planète;
-        Orientation = orientationDépart;
+        _coordonnées = Point.Zero;
+        Orientation = orientation;
+    }
 
-        var coordonnéesCanoniques = _planète.Canoniser(latitude, longitude);
-
-        Latitude = coordonnéesCanoniques.Latitude;
-        Longitude = coordonnéesCanoniques.Longitude;
+    public Rover(PointCardinal orientation, IPlanète planète, Point coordonnées)
+    {
+        _planète = planète;
+        _coordonnées = _planète.Canoniser(coordonnées);
+        Orientation = orientation;
     }
 
     public Rover TournerADroite() => new(Orientation.SuivantHoraire, _planète);
     public Rover TournerAGauche() => new(Orientation.SuivantAntihoraire, _planète);
 
     public Rover Avancer() => new (Orientation, _planète, 
-        Latitude + Orientation.VecteurLatitude,
-        Longitude + Orientation.VecteurLongitude
+        _coordonnées + new Point(Orientation.VecteurLatitude, Orientation.VecteurLongitude)
     );
 
     public Rover Reculer() => new(Orientation, _planète,
-        Latitude - Orientation.VecteurLatitude,
-        Longitude - Orientation.VecteurLongitude
+        _coordonnées - new Point(Orientation.VecteurLatitude, Orientation.VecteurLongitude)
     );
 }
