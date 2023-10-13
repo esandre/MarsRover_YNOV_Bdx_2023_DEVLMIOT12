@@ -7,6 +7,7 @@ public class RotationTest
         new []{ PointCardinal.Nord, PointCardinal.Est },
         new []{ PointCardinal.Est, PointCardinal.Sud },
         new []{ PointCardinal.Sud, PointCardinal.Ouest },
+        new []{ PointCardinal.Ouest, PointCardinal.Nord },
     };
 
     [Theory]

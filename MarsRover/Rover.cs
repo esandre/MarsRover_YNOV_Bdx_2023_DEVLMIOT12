@@ -15,6 +15,9 @@ public class Rover
         if (Orientation == PointCardinal.Est)
             return new Rover(PointCardinal.Sud);
 
+        if (Orientation == PointCardinal.Ouest)
+            return new Rover(PointCardinal.Nord);
+
         return new Rover(PointCardinal.Ouest);
     }
 
