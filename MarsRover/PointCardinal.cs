@@ -1,13 +1,13 @@
 ﻿namespace MarsRover;
 
-public class PointCardinal : IEquatable<PointCardinal>
+public class PointCardinal
 {
     private readonly string _nom;
 
-    public static PointCardinal Nord { get; } = new (nameof(Nord));
-    public static PointCardinal Est { get; } = new (nameof(Est));
-    public static PointCardinal Ouest { get; } = new (nameof(Ouest));
-    public static PointCardinal Sud { get; } = new (nameof(Sud));
+    public static PointCardinal Nord { get; } = new (nameof(Nord), vecteurLatitude: 1);
+    public static PointCardinal Est { get; } = new (nameof(Est), vecteurLongitude: 1);
+    public static PointCardinal Ouest { get; } = new (nameof(Ouest), vecteurLongitude: -1);
+    public static PointCardinal Sud { get; } = new (nameof(Sud), vecteurLatitude: -1);
 
     internal PointCardinal SuivantHoraire
     {
@@ -29,61 +29,16 @@ public class PointCardinal : IEquatable<PointCardinal>
 
     internal PointCardinal SuivantAntihoraire => SuivantHoraire.SuivantHoraire.SuivantHoraire;
 
-    internal int VecteurLatitude
-    {
-        get
-        {
-            if (this == Nord)
-                return 1;
+    internal int VecteurLatitude { get; }
+    internal int VecteurLongitude { get; }
 
-            if (this == Sud)
-                return -1;
-
-            return 0;
-        }
-    }
-
-    internal int VecteurLongitude
-    {
-        get
-        {
-            if (this == Est)
-                return 1;
-
-            if (this == Ouest)
-                return -1;
-
-            return 0;
-        }
-    }
-
-    private PointCardinal(string nom)
+    private PointCardinal(string nom, int vecteurLatitude = 0, int vecteurLongitude = 0)
     {
         _nom = nom;
+        VecteurLatitude = vecteurLatitude;
+        VecteurLongitude = vecteurLongitude;
     }
 
     /// <inheritdoc />
     public override string ToString() => _nom;
-
-    /// <inheritdoc />
-    public bool Equals(PointCardinal? other)
-    {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return _nom == other._nom;
-    }
-
-    /// <inheritdoc />
-    public override bool Equals(object? obj)
-    {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
-        return Equals((PointCardinal)obj);
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode() => _nom.GetHashCode();
-    public static bool operator ==(PointCardinal? left, PointCardinal? right) => Equals(left, right);
-    public static bool operator !=(PointCardinal? left, PointCardinal? right) => !Equals(left, right);
 }
