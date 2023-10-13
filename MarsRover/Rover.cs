@@ -18,6 +18,11 @@ public class Rover
 
     public Rover Avancer() => new (Orientation, 
         Latitude + Orientation.VecteurLatitude,
-        Latitude + Orientation.VecteurLongitude // BUG 
+        Longitude + Orientation.VecteurLongitude
+    );
+
+    public Rover Reculer() => new(Orientation,
+        Latitude - Orientation.VecteurLatitude,
+        Longitude - Orientation.VecteurLongitude
     );
 }

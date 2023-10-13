@@ -1,6 +1,6 @@
 ﻿namespace MarsRover;
 
-public class PointCardinal
+public class PointCardinal : IEquatable<PointCardinal>
 {
     private readonly string _nom;
 
@@ -64,4 +64,26 @@ public class PointCardinal
 
     /// <inheritdoc />
     public override string ToString() => _nom;
+
+    /// <inheritdoc />
+    public bool Equals(PointCardinal? other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return _nom == other._nom;
+    }
+
+    /// <inheritdoc />
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((PointCardinal)obj);
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode() => _nom.GetHashCode();
+    public static bool operator ==(PointCardinal? left, PointCardinal? right) => Equals(left, right);
+    public static bool operator !=(PointCardinal? left, PointCardinal? right) => !Equals(left, right);
 }
