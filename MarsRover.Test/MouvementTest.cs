@@ -17,4 +17,20 @@ public class MouvementTest
         // ET l'orientation reste identique
         Assert.Equal(étatFinal.Orientation, rover.Orientation);
     }
+
+    [Fact]
+    public void AvancerSud()
+    {
+        // ETANT DONNE un rover orienté sud
+        var rover = new Rover(PointCardinal.Sud);
+
+        // QUAND on avance
+        var étatFinal = rover.Avancer();
+
+        // ALORS la latitude se décrémente
+        Assert.Equal(rover.Latitude - 1, étatFinal.Latitude);
+
+        // ET l'orientation reste identique
+        Assert.Equal(étatFinal.Orientation, rover.Orientation);
+    }
 }
