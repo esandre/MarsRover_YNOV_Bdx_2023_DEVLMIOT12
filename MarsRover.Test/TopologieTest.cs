@@ -37,8 +37,7 @@ public class TopologieTest
             étatFinal = étatFinal.Avancer();
 
         // ALORS la position et l'orientation restent les mêmes
-        Assert.Equal(rover.Latitude, étatFinal.Latitude);
-        Assert.Equal(rover.Longitude, étatFinal.Longitude);
+        Assert.Equal(rover.Coordonnées, étatFinal.Coordonnées);
         Assert.Equal(rover.Orientation, étatFinal.Orientation);
     }
 
