@@ -9,7 +9,7 @@ public class PointCardinal
     public static PointCardinal Ouest { get; } = new (nameof(Ouest));
     public static PointCardinal Sud { get; } = new (nameof(Sud));
 
-    public PointCardinal SuivantHoraire
+    internal PointCardinal SuivantHoraire
     {
         get
         {
@@ -26,6 +26,8 @@ public class PointCardinal
             return Ouest;
         }
     }
+
+    internal PointCardinal SuivantAntihoraire => SuivantHoraire.SuivantHoraire.SuivantHoraire;
 
     private PointCardinal(string nom)
     {
