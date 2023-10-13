@@ -4,17 +4,20 @@ namespace MarsRover.Test;
 
 public class MouvementTest
 {
-    public static IEnumerable<object[]> CasAvancer => new[]
+    private static Dictionary<PointCardinal, (int Latitude, int Longitude)> Vecteurs => new()
     {
-        new object[] { PointCardinal.Nord, 1, 0 },
-        new object[] { PointCardinal.Est, 0, 1 },
-        new object[] { PointCardinal.Sud, -1, 0 },
-        new object[] { PointCardinal.Ouest, 0, -1 },
-        new object[] { PointCardinal.Nord, 1, 0, 2 },
-        new object[] { PointCardinal.Est, 0, 1, 2 },
-        new object[] { PointCardinal.Sud, -1, 0, 2 },
-        new object[] { PointCardinal.Ouest, 0, -1, 2 }
+        { PointCardinal.Nord, (1, 0) },
+        { PointCardinal.Est, (0, 1) },
+        { PointCardinal.Sud, (-1, 0) },
+        { PointCardinal.Ouest, (0, -1) },
     };
+
+    public static IEnumerable<object[]> CasAvancer => new CartesianData(Vecteurs, new[] { 1, 2 })
+        .Select(cas =>
+        {
+            var kv = (KeyValuePair<PointCardinal, (int Latitude, int Longitude)>) cas[0];
+            return new[] { kv.Key, kv.Value.Latitude, kv.Value.Longitude, cas[1] };
+        });
 
     [Theory]
     [MemberData(nameof(CasAvancer))]
@@ -41,17 +44,12 @@ public class MouvementTest
         Assert.Equal(rover.Orientation, étatFinal.Orientation);
     }
 
-    public static IEnumerable<object[]> CasReculer => new[]
-    {
-        new object[] { PointCardinal.Sud, 1, 0 },
-        new object[] { PointCardinal.Ouest, 0, 1 },
-        new object[] { PointCardinal.Nord, -1, 0 },
-        new object[] { PointCardinal.Est, 0, -1 },
-        new object[] { PointCardinal.Sud, 1, 0, 2 },
-        new object[] { PointCardinal.Ouest, 0, 1, 2 },
-        new object[] { PointCardinal.Nord, -1, 0, 2 },
-        new object[] { PointCardinal.Est, 0, -1, 2 }
-    };
+    public static IEnumerable<object[]> CasReculer => new CartesianData(Vecteurs, new[] { 1, 2 })
+        .Select(cas =>
+        {
+            var kv = (KeyValuePair<PointCardinal, (int Latitude, int Longitude)>)cas[0];
+            return new[] { kv.Key, - kv.Value.Latitude, - kv.Value.Longitude, cas[1] };
+        });
 
     [Theory]
     [MemberData(nameof(CasReculer))]

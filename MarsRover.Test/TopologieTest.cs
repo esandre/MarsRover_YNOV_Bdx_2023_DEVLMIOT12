@@ -9,7 +9,7 @@ public class TopologieTest
     {
         // QUAND on instancie une planète toroïdale de taille 0
         // ReSharper disable once ObjectCreationAsStatement
-        void Act() => new PlanèteToroïdale(0);
+        static void Act() => new PlanèteToroïdale(0);
 
         // ALORS une exception est lancée
         Assert.Throws<ArgumentOutOfRangeException>(Act);
