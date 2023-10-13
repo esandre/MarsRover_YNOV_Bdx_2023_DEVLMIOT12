@@ -2,79 +2,31 @@
 
 public class MouvementTest
 {
-    [Fact]
-    public void AvancerNord()
+    public static IEnumerable<object[]> CasAvancer => new[]
     {
-        // ETANT DONNE un rover orienté nord
-        var rover = new Rover(PointCardinal.Nord);
+        new object[] { PointCardinal.Nord, 1, 0 },
+        new object[] { PointCardinal.Est, 0, 1 },
+        new object[] { PointCardinal.Sud, -1, 0 },
+        new object[] { PointCardinal.Ouest, 0, -1 },
+    };
+
+    [Theory]
+    [MemberData(nameof(CasAvancer))]
+    public void Avancer(PointCardinal orientationDépart, int vecteurLatitude, int vecteurLongitude)
+    {
+        // ETANT DONNE un rover orienté <orientationDépart>
+        var rover = new Rover(orientationDépart);
 
         // QUAND on avance
         var étatFinal = rover.Avancer();
 
-        // ALORS la latitude s'incrémente
-        Assert.Equal(rover.Latitude + 1, étatFinal.Latitude);
+        // ALORS le <vecteurLatitude> est appliqué à la Latitude
+        Assert.Equal(rover.Latitude + vecteurLatitude, étatFinal.Latitude);
+
+        // ET le <vecteurLongitude> est appliqué à la Longitude
+        Assert.Equal(rover.Longitude + vecteurLongitude, étatFinal.Longitude);
 
         // ET l'orientation reste identique
         Assert.Equal(rover.Orientation, étatFinal.Orientation);
-
-        // ET la longitude reste identique
-        Assert.Equal(rover.Longitude, étatFinal.Longitude);
-    }
-
-    [Fact]
-    public void AvancerSud()
-    {
-        // ETANT DONNE un rover orienté sud
-        var rover = new Rover(PointCardinal.Sud);
-
-        // QUAND on avance
-        var étatFinal = rover.Avancer();
-
-        // ALORS la latitude se décrémente
-        Assert.Equal(rover.Latitude - 1, étatFinal.Latitude);
-
-        // ET l'orientation reste identique
-        Assert.Equal(rover.Orientation, étatFinal.Orientation);
-
-        // ET la longitude reste identique
-        Assert.Equal(rover.Longitude, étatFinal.Longitude);
-    }
-
-    [Fact]
-    public void AvancerEst()
-    {
-        // ETANT DONNE un rover orienté est
-        var rover = new Rover(PointCardinal.Est);
-
-        // QUAND on avance
-        var étatFinal = rover.Avancer();
-
-        // ALORS la longitude s'incrémente
-        Assert.Equal(rover.Longitude + 1, étatFinal.Longitude);
-
-        // ET l'orientation reste identique
-        Assert.Equal(rover.Orientation, étatFinal.Orientation);
-
-        // ET la latitude reste identique
-        Assert.Equal(rover.Latitude, étatFinal.Latitude);
-    }
-
-    [Fact]
-    public void AvancerOuest()
-    {
-        // ETANT DONNE un rover orienté ouest
-        var rover = new Rover(PointCardinal.Ouest);
-
-        // QUAND on avance
-        var étatFinal = rover.Avancer();
-
-        // ALORS la longitude se décrémente
-        Assert.Equal(rover.Longitude - 1, étatFinal.Longitude);
-
-        // ET l'orientation reste identique
-        Assert.Equal(rover.Orientation, étatFinal.Orientation);
-
-        // ET la latitude reste identique
-        Assert.Equal(rover.Latitude, étatFinal.Latitude);
     }
 }
