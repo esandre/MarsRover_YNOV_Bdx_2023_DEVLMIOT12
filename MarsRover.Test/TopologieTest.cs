@@ -6,16 +6,17 @@ public class TopologieTest
 {
     // Planète 0 impossible
 
-    [Fact]
-    public void PlaneteMinimale()
+    [Theory]
+    [InlineData(1)]
+    public void PlaneteAvancer(ushort taille)
     {
-        // ETANT DONNE une planète de taille 1
-        var planète = new PlanèteToroïdale(taille: 1);
+        // ETANT DONNE une planète de taille <taille>
+        var planète = new PlanèteToroïdale(taille);
 
         // ET un rover
         var rover = new RoverBuilder().SurLaPlanète(planète).Build();
 
-        // QUAND on avance
+        // QUAND on avance <taille> fois
         var étatFinal = rover.Avancer();
 
         // ALORS la position et l'orientation restent les mêmes
