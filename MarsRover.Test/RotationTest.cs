@@ -4,7 +4,8 @@ public class RotationTest
 {
     public static IEnumerable<object[]> Cas_Tourner_Droite => new[]
     {
-        new []{ PointCardinal.Nord, PointCardinal.Est }
+        new []{ PointCardinal.Nord, PointCardinal.Est },
+        new []{ PointCardinal.Est, PointCardinal.Sud },
     };
 
     [Theory]
