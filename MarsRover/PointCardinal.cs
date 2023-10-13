@@ -29,6 +29,34 @@ public class PointCardinal
 
     internal PointCardinal SuivantAntihoraire => SuivantHoraire.SuivantHoraire.SuivantHoraire;
 
+    internal int VecteurLatitude
+    {
+        get
+        {
+            if (this == Nord)
+                return 1;
+
+            if (this == Sud)
+                return -1;
+
+            return 0;
+        }
+    }
+
+    internal int VecteurLongitude
+    {
+        get
+        {
+            if (this == Est)
+                return 1;
+
+            if (this == Ouest)
+                return -1;
+
+            return 0;
+        }
+    }
+
     private PointCardinal(string nom)
     {
         _nom = nom;
