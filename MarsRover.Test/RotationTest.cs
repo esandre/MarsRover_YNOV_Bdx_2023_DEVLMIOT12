@@ -19,27 +19,39 @@ public class RotationTest
     [MemberData(nameof(CasTournerDroite))]
     public void TournerDroite(PointCardinal origine, PointCardinal attendu)
     {
-        // ETANT DONNE un Rover orienté <origine>
-        var rover = new RoverBuilder().Orienté(origine).Build();
+        // ETANT DONNE un Rover orienté <origine> à des coordonnées aléatoires
+        var rover = new RoverBuilder()
+            .Orienté(origine)
+            .CoordonnéesAléatoires()
+            .Build();
 
         // QUAND il tourne à droite
-        var etatAprèsOpération = rover.TournerADroite();
+        var étatAprèsOpération = rover.TournerADroite();
 
         // ALORS il est orienté <attendu>
-        Assert.Equal(attendu, etatAprèsOpération.Orientation);
+        Assert.Equal(attendu, étatAprèsOpération.Orientation);
+
+        // ET toujours à la même position
+        Assert.Equal(rover.Coordonnées, étatAprèsOpération.Coordonnées);
     }
 
     [Theory]
     [MemberData(nameof(CasTournerGauche))]
     public void TournerGauche(PointCardinal origine, PointCardinal attendu)
     {
-        // ETANT DONNE un Rover orienté <origine>
-        var rover = new RoverBuilder().Orienté(origine).Build();
+        // ETANT DONNE un Rover orienté <origine> à des coordonnées aléatoires
+        var rover = new RoverBuilder()
+            .Orienté(origine)
+            .CoordonnéesAléatoires()
+            .Build();
 
         // QUAND il tourne à gauche
-        var etatAprèsOpération = rover.TournerAGauche();
+        var étatAprèsOpération = rover.TournerAGauche();
 
         // ALORS il est orienté <attendu>
-        Assert.Equal(attendu, etatAprèsOpération.Orientation);
+        Assert.Equal(attendu, étatAprèsOpération.Orientation);
+
+        // ET toujours à la même position
+        Assert.Equal(rover.Coordonnées, étatAprèsOpération.Coordonnées);
     }
 }
