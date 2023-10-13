@@ -1,3 +1,5 @@
+using MarsRover.Test.Utilities;
+
 namespace MarsRover.Test;
 
 public class RotationTest
@@ -18,7 +20,7 @@ public class RotationTest
     public void TournerDroite(PointCardinal origine, PointCardinal attendu)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var rover = new Rover(origine);
+        var rover = new RoverBuilder().Orienté(origine).Build();
 
         // QUAND il tourne à droite
         var etatAprèsOpération = rover.TournerADroite();
@@ -32,7 +34,7 @@ public class RotationTest
     public void TournerGauche(PointCardinal origine, PointCardinal attendu)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var rover = new Rover(origine);
+        var rover = new RoverBuilder().Orienté(origine).Build();
 
         // QUAND il tourne à gauche
         var etatAprèsOpération = rover.TournerAGauche();

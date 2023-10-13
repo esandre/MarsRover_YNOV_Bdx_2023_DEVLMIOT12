@@ -1,4 +1,6 @@
-﻿namespace MarsRover.Test;
+﻿using MarsRover.Test.Utilities;
+
+namespace MarsRover.Test;
 
 public class MouvementTest
 {
@@ -20,7 +22,7 @@ public class MouvementTest
         int vecteurLatitude, int vecteurLongitude, ushort répétitions = 1)
     {
         // ETANT DONNE un rover orienté <orientationDépart>
-        var rover = new Rover(orientationDépart);
+        var rover = new RoverBuilder().Orienté(orientationDépart).Build();
 
         // QUAND on avance <répétitions> fois
         var étatFinal = rover;
@@ -57,7 +59,7 @@ public class MouvementTest
         int vecteurLatitude, int vecteurLongitude, ushort répétitions = 1)
     {
         // ETANT DONNE un rover orienté <orientationDépart>
-        var rover = new Rover(orientationDépart);
+        var rover = new RoverBuilder().Orienté(orientationDépart).Build();
 
         // QUAND on recule <répétitions> fois
         var étatFinal = rover;
