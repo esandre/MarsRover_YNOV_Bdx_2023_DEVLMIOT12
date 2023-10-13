@@ -2,16 +2,22 @@ namespace MarsRover.Test;
 
 public class RotationTest
 {
-    [Fact]
-    public void Tourner_Droite()
+    public static IEnumerable<object[]> Cas_Tourner_Droite => new[]
     {
-        // ETANT DONNE un Rover orienté Nord
-        var rover = new Rover(PointCardinal.Nord);
+        new []{ PointCardinal.Nord, PointCardinal.Est }
+    };
+
+    [Theory]
+    [MemberData(nameof(Cas_Tourner_Droite))]
+    public void Tourner_Droite(PointCardinal origine, PointCardinal attendu)
+    {
+        // ETANT DONNE un Rover orienté <origine>
+        var rover = new Rover(origine);
 
         // QUAND il tourne à droite
         var etatAprèsOpération = rover.TournerADroite();
 
-        // ALORS il est orienté Est
-        Assert.Equal(PointCardinal.Est, etatAprèsOpération.Orientation);
+        // ALORS il est orienté <attendu>
+        Assert.Equal(attendu, etatAprèsOpération.Orientation);
     }
 }
