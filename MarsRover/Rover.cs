@@ -21,10 +21,10 @@ public class Rover
     public Rover TournerAGauche() => new(Orientation.SuivantAntihoraire, _planète, Coordonnées);
 
     public Rover Avancer() => new (Orientation, _planète, 
-        Coordonnées + new Point(Orientation.VecteurLatitude, Orientation.VecteurLongitude)
+        Coordonnées + new Point(Orientation.VecteurLongitude, Orientation.VecteurLatitude)
     );
 
     public Rover Reculer() => new(Orientation, _planète,
-        Coordonnées - new Point(Orientation.VecteurLatitude, Orientation.VecteurLongitude)
+        Coordonnées - new Point(Orientation.VecteurLongitude, Orientation.VecteurLatitude)
     );
 }

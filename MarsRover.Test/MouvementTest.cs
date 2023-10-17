@@ -16,7 +16,7 @@ public class MouvementTest
         .Select(cas =>
         {
             var kv = (KeyValuePair<PointCardinal, (int Latitude, int Longitude)>) cas[0];
-            return new[] { kv.Key, kv.Value.Latitude, kv.Value.Longitude, cas[1] };
+            return new[] { kv.Key, kv.Value.Longitude, kv.Value.Latitude, cas[1] };
         });
 
     [Theory]
@@ -48,7 +48,7 @@ public class MouvementTest
         .Select(cas =>
         {
             var kv = (KeyValuePair<PointCardinal, (int Latitude, int Longitude)>)cas[0];
-            return new[] { kv.Key, - kv.Value.Latitude, - kv.Value.Longitude, cas[1] };
+            return new[] { kv.Key, - kv.Value.Longitude, - kv.Value.Latitude, cas[1] };
         });
 
     [Theory]
