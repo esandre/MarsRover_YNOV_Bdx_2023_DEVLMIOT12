@@ -24,6 +24,28 @@ public class CommandesTest
         Assert.Equal(étatFinalAttendu, étatFinal, new RoverComparer());
     }
 
+    public static IEnumerable<object[]> CasCommandeComplexe => 
+        new CartesianData(TestPrimitives.CommandesSimples, TestPrimitives.CommandesSimples);
+
+    [Theory]
+    [MemberData(nameof(CasCommandeComplexe))]
+    public void CommandeComplexe(params char[] suiteCommandes)
+    {
+        // ETANT DONNE la commande complexe constituée des commandes <suiteCommandes>
+        var commandeComplexe = new string(suiteCommandes);
+
+        // QUAND je l'applique au Rover
+        var rover = RoverBuilder.Default;
+        var étatFinal = rover.Exécuter(commandeComplexe);
+
+        // ALORS le rover réagit comme si on avait appliqué chacune de ses lettres à la suite
+        var roverTémoin = RoverBuilder.Default;
+        foreach (var commandeSimple in commandeComplexe)
+            roverTémoin = roverTémoin.Exécuter(commandeSimple);
+
+        Assert.Equal(roverTémoin, étatFinal, new RoverComparer());
+    }
+
     [Fact]
     public void CaractèreInconnu()
     {
