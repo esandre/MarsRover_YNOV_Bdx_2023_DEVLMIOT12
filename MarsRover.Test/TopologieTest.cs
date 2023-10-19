@@ -7,9 +7,9 @@ public class TopologieTest
     [Fact]
     public void PlaneteZero()
     {
-        // QUAND on instancie une planète toroïdale de taille 0
+        // QUAND on instancie une planète de taille 0
         // ReSharper disable once ObjectCreationAsStatement
-        static void Act() => new PlanèteToroïdale(0);
+        static void Act() => new PlanèteBuilder().DeTaille(0).Build();
 
         // ALORS une exception est lancée
         Assert.Throws<ArgumentOutOfRangeException>(Act);
@@ -23,7 +23,7 @@ public class TopologieTest
     public void PlaneteAvancerBoucle(ushort taille, PointCardinal orientation)
     {
         // ETANT DONNE une planète de taille <taille>
-        var planète = new PlanèteToroïdale(taille);
+        var planète = new PlanèteBuilder().DeTaille(taille).Build();
 
         // ET un rover
         var rover = new RoverBuilder()
@@ -49,7 +49,7 @@ public class TopologieTest
     public void PlaneteAvancer(ushort taille, PointCardinal orientation)
     {
         // ETANT DONNE une planète de taille <taille>
-        var planète = new PlanèteToroïdale(taille);
+        var planète = new PlanèteBuilder().DeTaille(taille).Build();
 
         // ET un rover orienté <orientation>
         var rover = new RoverBuilder()

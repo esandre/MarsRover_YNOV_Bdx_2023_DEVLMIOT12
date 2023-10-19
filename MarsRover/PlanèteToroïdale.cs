@@ -1,6 +1,6 @@
 ﻿namespace MarsRover;
 
-public class PlanèteToroïdale : IPlanète
+internal class PlanèteToroïdale : IPlanète
 {
     private readonly int _taille;
 
