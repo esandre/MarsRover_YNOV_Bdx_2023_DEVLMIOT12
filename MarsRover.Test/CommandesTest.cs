@@ -1,4 +1,6 @@
-﻿using MarsRover.Test.Utilities;
+﻿using FsCheck;
+using FsCheck.Xunit;
+using MarsRover.Test.Utilities;
 
 namespace MarsRover.Test;
 
@@ -18,8 +20,7 @@ public class CommandesTest
 
         // ALORS le rover réagit comme si on avait appelé la méthode <nomMéthodeEquivalente>
         var roverTémoin = RoverBuilder.Default;
-        var étatFinalAttendu
-            = (Rover) typeof(Rover).GetMethod(nomMéthodeEquivalente)!.Invoke(roverTémoin, Array.Empty<object>())!;
+        var étatFinalAttendu = roverTémoin.InvoquerAction(nomMéthodeEquivalente);
 
         Assert.Equal(étatFinalAttendu, étatFinal, new RoverComparer());
     }
