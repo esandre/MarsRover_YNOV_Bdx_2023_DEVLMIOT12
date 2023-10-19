@@ -14,9 +14,11 @@ internal class RoverBuilder
         return this;
     }
 
-    public RoverBuilder SurLaPlanète(IPlanète planète)
+    public RoverBuilder SurLaPlanète(Func<PlanèteBuilder, PlanèteBuilder> configuration)
     {
-        _planète = planète;
+        var builder = new PlanèteBuilder();
+        configuration.Invoke(builder);
+        _planète = builder.Build();
         return this;
     }
 

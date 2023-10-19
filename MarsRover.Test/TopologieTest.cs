@@ -23,11 +23,9 @@ public class TopologieTest
     public void PlaneteAvancerBoucle(ushort taille, PointCardinal orientation)
     {
         // ETANT DONNE une planète de taille <taille>
-        var planète = new PlanèteBuilder().DeTaille(taille).Build();
-
         // ET un rover
         var rover = new RoverBuilder()
-            .SurLaPlanète(planète)
+            .SurLaPlanète(planète => planète.DeTaille(taille))
             .Orienté(orientation)
             .Build();
 
@@ -49,11 +47,9 @@ public class TopologieTest
     public void PlaneteAvancer(ushort taille, PointCardinal orientation)
     {
         // ETANT DONNE une planète de taille <taille>
-        var planète = new PlanèteBuilder().DeTaille(taille).Build();
-
         // ET un rover orienté <orientation>
         var rover = new RoverBuilder()
-            .SurLaPlanète(planète)
+            .SurLaPlanète(planète => planète.DeTaille(taille))
             .Orienté(orientation)
             .Build();
 
