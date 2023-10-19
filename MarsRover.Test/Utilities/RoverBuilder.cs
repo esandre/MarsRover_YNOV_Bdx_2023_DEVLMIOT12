@@ -2,6 +2,8 @@
 
 internal class RoverBuilder
 {
+    public static Rover Default => new RoverBuilder().Build();
+
     private PointCardinal _pointCardinal = PointCardinal.Nord;
     private IPlanète _planète = new PlanèteInfinie();
     private Point _coordonnéesDépart = Point.Zero;
