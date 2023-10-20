@@ -9,8 +9,8 @@ public record Position(Point Coordonnées, PointCardinal Orientation)
         => this with { Orientation = Orientation.SuivantAntihoraire };
 
     public Position MouvementPrograde()
-        => this with { Coordonnées = Coordonnées + Orientation.Vecteur };
+        => this with { Coordonnées = Orientation.AppliquerVecteur(Coordonnées) };
 
     public Position MouvementRétrograde()
-        => this with { Coordonnées = Coordonnées - Orientation.Vecteur };
+        => this with { Coordonnées = -Orientation.AppliquerVecteur(-Coordonnées) };
 }
