@@ -1,4 +1,6 @@
-﻿namespace MarsRover;
+﻿using System.Text;
+
+namespace MarsRover;
 
 public record Coordonnée 
 {
@@ -8,11 +10,18 @@ public record Coordonnée
     }
 
     public static Coordonnée Zero => new (0);
+    public static Coordonnée Un => new (1);
+    public static Coordonnée MoinsUn => new (-1);
 
     public Coordonnée Suivante => new(Valeur + 1);
-    public Coordonnée Précédent => new(Valeur - 1);
 
-    public int Valeur { get; } // TODO : Primitive
+    private int Valeur { get; }
+
+    public Coordonnée Absolue()
+    {
+        if (Valeur > 0) return this;
+        return new Coordonnée(-Valeur);
+    }
 
     public static Coordonnée operator+(Coordonnée a, Coordonnée b) 
         => new(a.Valeur + b.Valeur);
@@ -22,4 +31,16 @@ public record Coordonnée
     
     public static Coordonnée operator%(Coordonnée a, Coordonnée b) 
         => new(a.Valeur % b.Valeur);
+
+    public static Coordonnée operator *(Coordonnée a, Coordonnée b)
+        => new(a.Valeur * b.Valeur);
+
+    public static Coordonnée operator -(Coordonnée coordonnée)
+        => new(-coordonnée.Valeur);
+
+    protected virtual bool PrintMembers(StringBuilder builder)
+    {
+        builder.Append(Valeur);
+        return true;
+    }
 }

@@ -51,10 +51,10 @@ public class TopologieTest
         Assert.Equal(rover.Orientation, étatFinal.Orientation);
 
         // ET la position a varié de <taille - 1>
-        var deltaLatitude = Math.Abs(étatFinal.Latitude - rover.Latitude);
-        var deltaLongitude = Math.Abs(étatFinal.Longitude - rover.Longitude);
-        var distanceManhattan = deltaLatitude + deltaLongitude;
-
-        Assert.Equal(taille - 1, distanceManhattan);
+        var distanceManhattan = étatFinal.Coordonnées.DistanceAvec(rover.Coordonnées);
+        var distanceAttendue = Coordonnée.MoinsUn;
+        for (var i = 0; i < taille; i++)
+            distanceAttendue = distanceAttendue.Suivante;
+        Assert.Equal(distanceAttendue, distanceManhattan);
     }
 }

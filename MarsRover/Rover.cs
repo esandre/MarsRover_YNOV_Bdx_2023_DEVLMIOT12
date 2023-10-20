@@ -7,9 +7,6 @@ public class Rover
     public Point Coordonnées { get; }
     public PointCardinal Orientation { get; }
 
-    public int Latitude => Coordonnées.X.Valeur; // TODO : type primitif
-    public int Longitude => Coordonnées.Y.Valeur; // TODO : type primitif
-
     public Rover(PointCardinal orientation, IPlanète planète, Point coordonnées)
     {
         _planète = planète;

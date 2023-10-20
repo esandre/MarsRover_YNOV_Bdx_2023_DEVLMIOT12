@@ -4,25 +4,25 @@ namespace MarsRover.Test;
 
 public class MouvementTest
 {
-    private static Dictionary<PointCardinal, (int Latitude, int Longitude)> Vecteurs => new()
+    private static Dictionary<PointCardinal, Point> Vecteurs => new()
     {
-        { PointCardinal.Nord, (1, 0) },
-        { PointCardinal.Est, (0, 1) },
-        { PointCardinal.Sud, (-1, 0) },
-        { PointCardinal.Ouest, (0, -1) },
+        { PointCardinal.Nord, new Point(Coordonnée.Zero, Coordonnée.Un) },
+        { PointCardinal.Est, new Point(Coordonnée.Un, Coordonnée.Zero) },
+        { PointCardinal.Sud, new Point(Coordonnée.Zero, Coordonnée.MoinsUn) },
+        { PointCardinal.Ouest, new Point(Coordonnée.MoinsUn, Coordonnée.Zero) },
     };
 
     public static IEnumerable<object[]> CasAvancer => new CartesianData(Vecteurs, new[] { 1, 2 })
         .Select(cas =>
         {
-            var kv = (KeyValuePair<PointCardinal, (int Latitude, int Longitude)>) cas[0];
-            return new[] { kv.Key, kv.Value.Longitude, kv.Value.Latitude, cas[1] };
+            var kv = (KeyValuePair<PointCardinal, Point>) cas[0];
+            return new[] { kv.Key, kv.Value, cas[1] };
         });
 
     [Theory]
     [MemberData(nameof(CasAvancer))]
     public void Avancer(PointCardinal orientationDépart, 
-        int vecteurLatitude, int vecteurLongitude, ushort répétitions = 1)
+        Point vecteur, ushort répétitions = 1)
     {
         // ETANT DONNE un rover orienté <orientationDépart>
         var rover = new RoverBuilder().Orienté(orientationDépart).Build();
@@ -32,13 +32,12 @@ public class MouvementTest
         for (var i = 0; i < répétitions; i++)
             étatFinal = étatFinal.Avancer();
 
-        // ALORS le <vecteurLatitude> est appliqué à la Latitude <répétitions> fois
-        var totalMouvementsLatitude = vecteurLatitude * répétitions;
-        Assert.Equal(rover.Latitude + totalMouvementsLatitude, étatFinal.Latitude);
+        // ALORS le <vecteur> est appliqué aux Coordonnées <répétions> fois
+        var totalMouvementsLatitude = vecteur;
+        for (var i = 1; i < répétitions; i++)
+            totalMouvementsLatitude += vecteur;
 
-        // ET le <vecteurLongitude> est appliqué à la Longitude <répétitions> fois
-        var totalMouvementsLongitude = vecteurLongitude * répétitions;
-        Assert.Equal(rover.Longitude + totalMouvementsLongitude, étatFinal.Longitude);
+        Assert.Equal(rover.Coordonnées + totalMouvementsLatitude, étatFinal.Coordonnées);
 
         // ET l'orientation reste identique
         Assert.Equal(rover.Orientation, étatFinal.Orientation);
@@ -47,14 +46,14 @@ public class MouvementTest
     public static IEnumerable<object[]> CasReculer => new CartesianData(Vecteurs, new[] { 1, 2 })
         .Select(cas =>
         {
-            var kv = (KeyValuePair<PointCardinal, (int Latitude, int Longitude)>)cas[0];
-            return new[] { kv.Key, - kv.Value.Longitude, - kv.Value.Latitude, cas[1] };
+            var kv = (KeyValuePair<PointCardinal, Point>)cas[0];
+            return new[] { kv.Key, - kv.Value, cas[1] };
         });
 
     [Theory]
     [MemberData(nameof(CasReculer))]
     public void Reculer(PointCardinal orientationDépart,
-        int vecteurLatitude, int vecteurLongitude, ushort répétitions = 1)
+        Point vecteur, ushort répétitions = 1)
     {
         // ETANT DONNE un rover orienté <orientationDépart>
         var rover = new RoverBuilder().Orienté(orientationDépart).Build();
@@ -64,13 +63,12 @@ public class MouvementTest
         for (var i = 0; i < répétitions; i++)
             étatFinal = étatFinal.Reculer();
 
-        // ALORS le <vecteurLatitude> est soustrait à la Latitude <répétitions> fois
-        var totalMouvementsLatitude = vecteurLatitude * répétitions;
-        Assert.Equal(rover.Latitude + totalMouvementsLatitude, étatFinal.Latitude);
+        // ALORS le <vecteur> est appliqué aux Coordonnées <répétions> fois
+        var totalMouvementsLatitude = vecteur;
+        for (var i = 1; i < répétitions; i++)
+            totalMouvementsLatitude += vecteur;
 
-        // ET le <vecteurLongitude> est soustrait à la Longitude <répétitions> fois
-        var totalMouvementsLongitude = vecteurLongitude * répétitions;
-        Assert.Equal(rover.Longitude + totalMouvementsLongitude, étatFinal.Longitude);
+        Assert.Equal(rover.Coordonnées + totalMouvementsLatitude, étatFinal.Coordonnées);
 
         // ET l'orientation reste identique
         Assert.Equal(rover.Orientation, étatFinal.Orientation);

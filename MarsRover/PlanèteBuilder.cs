@@ -2,7 +2,7 @@
 
 public class PlanèteBuilder
 {
-    private ushort _taille = 2; // TODO : type primitif
+    private ushort _taille = 2;
     private Point? _obstacle;
 
     public PlanèteBuilder DeTailleMinimale()

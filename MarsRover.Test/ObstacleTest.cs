@@ -26,7 +26,7 @@ public class ObstacleTest
     public void ImpossibleDAvancerSurObstacle()
     {
         // ETANT DONNE un obstacle sur une position
-        var coordonnéesObstacle = new Point(Coordonnée.Zero, Coordonnée.Zero.Suivante);
+        var coordonnéesObstacle = new Point(Coordonnée.Zero, Coordonnée.Un);
 
         // ET un rover orienté nord, sur la case immédiatement au sud
         var coordonnéesRover = Point.Zero;
@@ -48,7 +48,7 @@ public class ObstacleTest
     public void ImpossibleDeReculeSurObstacle()
     {
         // ETANT DONNE un obstacle sur une position
-        var coordonnéesObstacle = new Point(Coordonnée.Zero, Coordonnée.Zero.Suivante);
+        var coordonnéesObstacle = new Point(Coordonnée.Zero, Coordonnée.Un);
 
         // ET un rover orienté sud, sur la case immédiatement au sud
         var coordonnéesRover = Point.Zero;

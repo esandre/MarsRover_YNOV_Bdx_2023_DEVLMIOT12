@@ -5,22 +5,21 @@ public class PointCardinal
     private readonly string _nom;
 
     public static PointCardinal Nord { get; } 
-        = new (nameof(Nord), new Point(Coordonnée.Zero, Coordonnée.Zero.Suivante));
+        = new (nameof(Nord), new Point(Coordonnée.Zero, Coordonnée.Un));
 
     public static PointCardinal Est { get; } 
-        = new (nameof(Est), new Point(Coordonnée.Zero.Suivante, Coordonnée.Zero));
+        = new (nameof(Est), new Point(Coordonnée.Un, Coordonnée.Zero));
 
     public static PointCardinal Ouest { get; } 
-        = new (nameof(Ouest), new Point(Coordonnée.Zero.Précédent, Coordonnée.Zero));
+        = new (nameof(Ouest), new Point(Coordonnée.MoinsUn, Coordonnée.Zero));
 
     public static PointCardinal Sud { get; } 
-        = new (nameof(Sud), new Point(Coordonnée.Zero, Coordonnée.Zero.Précédent));
+        = new (nameof(Sud), new Point(Coordonnée.Zero, Coordonnée.MoinsUn));
 
     internal PointCardinal SuivantHoraire
     {
         get
         {
-
             if (this == Nord)
                 return Est;
 

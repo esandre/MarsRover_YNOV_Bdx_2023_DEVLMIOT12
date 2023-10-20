@@ -11,8 +11,7 @@ internal class PlanèteToroïdale : IPlanète
 
     private PlanèteToroïdale()
     {
-        var un = Coordonnée.Zero.Suivante;
-        _pointMax = new Point(un, un);
+        _pointMax = new Point(Coordonnée.Un, Coordonnée.Un);
     }
 
     public static PlanèteToroïdale DeTailleUne => new();

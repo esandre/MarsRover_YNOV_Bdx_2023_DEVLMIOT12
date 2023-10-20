@@ -30,12 +30,12 @@ internal class RoverBuilder
     {
         var random = Random.Shared;
 
-        var x = Coordonnée.Zero;
-        for (var valeur = 0; valeur < random.Next(); valeur++)
+        var x = Coordonnée.Un;
+        for (var valeur = 1; valeur < random.Next(); valeur++)
             x = x.Suivante;
 
-        var y = Coordonnée.Zero;
-        for (var valeur = 0; valeur < random.Next(); valeur++)
+        var y = Coordonnée.Un;
+        for (var valeur = 1; valeur < random.Next(); valeur++)
             y = y.Suivante;
 
         return SituéA(new Point(x, y));
