@@ -1,6 +1,4 @@
-﻿using FsCheck;
-using FsCheck.Xunit;
-using MarsRover.Test.Utilities;
+﻿using MarsRover.Test.Utilities;
 
 namespace MarsRover.Test;
 

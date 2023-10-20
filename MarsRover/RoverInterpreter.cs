@@ -8,12 +8,9 @@ public static class RoverInterpreter
     public const char CommandeTournerAGauche = 'G';
 
     public static Rover Exécuter(this Rover rover, string commande)
-    {
-        foreach (var commandeSimple in commande)
-            rover = rover.Exécuter(commandeSimple);
-
-        return rover;
-    }
+        => commande.Aggregate(rover,
+            (current, commandeSimple) => current.Exécuter(commandeSimple)
+        );
 
     public static Rover Exécuter(this Rover rover, char commande)
         => commande switch
