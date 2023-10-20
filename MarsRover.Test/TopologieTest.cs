@@ -4,17 +4,6 @@ namespace MarsRover.Test;
 
 public class TopologieTest
 {
-    [Fact]
-    public void PlaneteZero()
-    {
-        // QUAND on instancie une planète de taille 0
-        // ReSharper disable once ObjectCreationAsStatement
-        static void Act() => new PlanèteBuilder().DeTaille(0).Build();
-
-        // ALORS une exception est lancée
-        Assert.Throws<ArgumentOutOfRangeException>(Act);
-    }
-
     public static IEnumerable<object[]> CasPlaneteAvancerBoucle
         => new CartesianData(new[] { 1, 2 }, TestPrimitives.PointsCardinaux);
 
@@ -25,7 +14,7 @@ public class TopologieTest
         // ETANT DONNE une planète de taille <taille>
         // ET un rover
         var rover = new RoverBuilder()
-            .SurLaPlanète(planète => planète.DeTaille(taille))
+            .SurLaPlanèteDeTaille(taille)
             .Orienté(orientation)
             .Build();
 
@@ -49,7 +38,7 @@ public class TopologieTest
         // ETANT DONNE une planète de taille <taille>
         // ET un rover orienté <orientation>
         var rover = new RoverBuilder()
-            .SurLaPlanète(planète => planète.DeTaille(taille))
+            .SurLaPlanèteDeTaille(taille)
             .Orienté(orientation)
             .Build();
 

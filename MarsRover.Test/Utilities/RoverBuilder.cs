@@ -1,4 +1,6 @@
-﻿namespace MarsRover.Test.Utilities;
+﻿using Random = System.Random;
+
+namespace MarsRover.Test.Utilities;
 
 internal class RoverBuilder
 {
@@ -42,6 +44,18 @@ internal class RoverBuilder
     public RoverBuilder SituéA(Point coordonnées)
     {
         _coordonnéesDépart = coordonnées;
+        return this;
+    }
+
+    public RoverBuilder SurLaPlanèteDeTaille(uint taille)
+    {
+        var builder = new PlanèteBuilder().DeTailleMinimale();
+
+        for (var tailleActuelle = 1; tailleActuelle < taille; tailleActuelle++)
+            builder.AugmenterLaTailleDeLaPlanète();
+
+        _planète = builder.Build();
+
         return this;
     }
 }

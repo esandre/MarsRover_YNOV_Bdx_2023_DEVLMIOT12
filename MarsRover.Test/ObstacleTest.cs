@@ -14,7 +14,7 @@ public class ObstacleTest
         // QUAND on instancie le rover
         void Act() => new RoverBuilder()
             .SurLaPlanète(planète => planète
-                .DeTaille(1) // 0,0 est donc le seul point possible
+                .DeTailleMinimale() // 0,0 est donc le seul point possible
                 .AyantUnObstacle(coordonnéesObstacle))
             .Build();
 
