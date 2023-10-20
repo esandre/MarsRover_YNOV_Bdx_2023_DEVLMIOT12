@@ -7,25 +7,25 @@ public static class RoverInterpreter
     public const char CommandeTournerADroite = 'D';
     public const char CommandeTournerAGauche = 'G';
 
-    public static Rover Exécuter(this Rover rover, string commande) // TODO : type primitif
+    private static readonly IDictionary<char, Func<Rover, Rover>> Commandes = 
+        new Dictionary<char, Func<Rover, Rover>>
+        {
+            { CommandeAvancer, rover => rover.Avancer() },
+            { CommandeReculer, rover => rover.Reculer() },
+            { CommandeTournerADroite, rover => rover.TournerADroite() },
+            { CommandeTournerAGauche, rover => rover.TournerAGauche() },
+        };
+
+    public static Rover Exécuter(this Rover rover, string commande)
         => commande.Aggregate(rover,
             (current, commandeSimple) => current.Exécuter(commandeSimple)
         );
 
-    public static Rover Exécuter(this Rover rover, char commande) // TODO : type primitif
+    public static Rover Exécuter(this Rover rover, char commande)
     {
-        switch (commande)
-        {
-            case CommandeReculer:
-                return rover.Reculer();
-            case CommandeTournerADroite:
-                return rover.TournerADroite();
-            case CommandeTournerAGauche:
-                return rover.TournerAGauche();
-            case CommandeAvancer:
-                return rover.Avancer();
-        }
+        if(!Commandes.ContainsKey(commande))
+            throw new ArgumentOutOfRangeException(nameof(commande));
 
-        throw new ArgumentOutOfRangeException(nameof(commande));
+        return Commandes[commande](rover);
     }
 }
