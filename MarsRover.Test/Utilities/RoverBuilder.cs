@@ -24,7 +24,7 @@ internal class RoverBuilder
         return this;
     }
 
-    public Rover Build() => new (_pointCardinal, _planète, _coordonnéesDépart);
+    public Rover Build() => new (new Position(_coordonnéesDépart, _pointCardinal), _planète);
 
     public RoverBuilder CoordonnéesAléatoires()
     {

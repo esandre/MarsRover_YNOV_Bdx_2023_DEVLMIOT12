@@ -3,6 +3,7 @@
 public class PointCardinal
 {
     private readonly string _nom;
+    internal Point Vecteur { get; }
 
     public static PointCardinal Nord { get; } 
         = new (nameof(Nord), new Point(Coordonnée.Zero, Coordonnée.Un));
@@ -34,8 +35,6 @@ public class PointCardinal
     }
 
     internal PointCardinal SuivantAntihoraire => SuivantHoraire.SuivantHoraire.SuivantHoraire;
-
-    internal Point Vecteur { get; }
 
     private PointCardinal(string nom, Point vecteurDéplacement)
     {

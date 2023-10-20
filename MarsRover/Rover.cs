@@ -3,40 +3,31 @@
 public class Rover
 {
     private readonly IPlanète _planète;
+    private readonly Position _position;
 
-    public Point Coordonnées { get; }
-    public PointCardinal Orientation { get; }
+    public PointCardinal Orientation => _position.Orientation;
+    public Point Coordonnées => _position.Coordonnées;
 
-    public Rover(PointCardinal orientation, IPlanète planète, Point coordonnées)
+    public Rover(Position position, IPlanète planète)
     {
         _planète = planète;
-        Coordonnées = _planète.Canoniser(coordonnées);
-        Orientation = orientation;
+        _position = position with { Coordonnées = _planète.Canoniser(position.Coordonnées) };
 
-        planète.SiCoordonnéesOccupées(Coordonnées, () => throw new AtterissageImpossibleException());
+        planète.SiCoordonnéesOccupées(_position.Coordonnées, () => throw new AtterissageImpossibleException());
     }
 
-    public Rover TournerADroite() => new(Orientation.SuivantHoraire, _planète, Coordonnées);
-    public Rover TournerAGauche() => new(Orientation.SuivantAntihoraire, _planète, Coordonnées);
+    public Rover TournerADroite() => new(_position.RotationHoraire(), _planète);
+    public Rover TournerAGauche() => new(_position.RotationAntihoraire(), _planète);
 
-    public Rover Avancer()
-    {
-        var nouvellesCoordonnées = Coordonnées + Orientation.Vecteur;
+    public Rover Avancer() => SeDéplacerVers(_position.MouvementPrograde());
+    public Rover Reculer() => SeDéplacerVers(_position.MouvementRétrograde());
 
-        return SeDéplacerVers(nouvellesCoordonnées);
-    }
-
-    public Rover Reculer()
-    {
-        var nouvellesCoordonnées = Coordonnées - Orientation.Vecteur;
-
-        return SeDéplacerVers(nouvellesCoordonnées);
-    }
-
-    private Rover SeDéplacerVers(Point coordonnées)
+    private Rover SeDéplacerVers(Position position)
     {
         var rover = this;
-        _planète.SiCoordonnéesLibres(coordonnées, () => rover = new Rover(Orientation, _planète, coordonnées));
+        _planète.SiCoordonnéesLibres(position.Coordonnées, 
+            () => rover = new Rover(position, _planète)
+        );
         return rover;
     }
 }
