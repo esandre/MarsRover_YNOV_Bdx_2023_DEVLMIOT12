@@ -12,4 +12,7 @@ internal class PlanèteToroïdale : IPlanète
     }
 
     public Point Canoniser(Point coordonnées) => coordonnées % _taille;
+
+    /// <inheritdoc />
+    public bool EstLibre(Point coordonnées) => true;
 }

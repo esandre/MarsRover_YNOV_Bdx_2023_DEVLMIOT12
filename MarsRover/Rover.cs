@@ -15,16 +15,28 @@ public class Rover
         _planète = planète;
         Coordonnées = _planète.Canoniser(coordonnées);
         Orientation = orientation;
+
+        if(!planète.EstLibre(Coordonnées))
+            throw new AtterissageImpossibleException();
     }
 
     public Rover TournerADroite() => new(Orientation.SuivantHoraire, _planète, Coordonnées);
     public Rover TournerAGauche() => new(Orientation.SuivantAntihoraire, _planète, Coordonnées);
 
-    public Rover Avancer() => new (Orientation, _planète, 
-        Coordonnées + new Point(Orientation.VecteurLongitude, Orientation.VecteurLatitude)
-    );
+    public Rover Avancer()
+    {
+        var nouvellesCoordonnées = Coordonnées + new Point(Orientation.VecteurLongitude, Orientation.VecteurLatitude);
+        return SeDéplacerVers(nouvellesCoordonnées);
+    }
 
-    public Rover Reculer() => new(Orientation, _planète,
-        Coordonnées - new Point(Orientation.VecteurLongitude, Orientation.VecteurLatitude)
-    );
+    public Rover Reculer()
+    {
+        var nouvellesCoordonnées = Coordonnées - new Point(Orientation.VecteurLongitude, Orientation.VecteurLatitude);
+        return SeDéplacerVers(nouvellesCoordonnées);
+    }
+
+    private Rover SeDéplacerVers(Point coordonnées) 
+        => _planète.EstLibre(coordonnées) 
+            ? new Rover(Orientation, _planète, coordonnées) 
+            : this;
 }
