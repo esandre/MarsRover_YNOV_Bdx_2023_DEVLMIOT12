@@ -27,7 +27,16 @@ internal class RoverBuilder
     public RoverBuilder CoordonnéesAléatoires()
     {
         var random = Random.Shared;
-        return SituéA(new Point(random.Next(), random.Next()));
+
+        var x = Coordonnée.Zero;
+        for (var valeur = 0; valeur < random.Next(); valeur++)
+            x = x.Suivante;
+
+        var y = Coordonnée.Zero;
+        for (var valeur = 0; valeur < random.Next(); valeur++)
+            y = y.Suivante;
+
+        return SituéA(new Point(x, y));
     }
 
     public RoverBuilder SituéA(Point coordonnées)

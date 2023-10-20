@@ -7,8 +7,8 @@ public class Rover
     public Point Coordonnées { get; }
     public PointCardinal Orientation { get; }
 
-    public int Latitude => Coordonnées.X;
-    public int Longitude => Coordonnées.Y;
+    public int Latitude => Coordonnées.X.Valeur; // TODO : type primitif
+    public int Longitude => Coordonnées.Y.Valeur; // TODO : type primitif
 
     public Rover(PointCardinal orientation, IPlanète planète, Point coordonnées)
     {
@@ -16,8 +16,7 @@ public class Rover
         Coordonnées = _planète.Canoniser(coordonnées);
         Orientation = orientation;
 
-        if(!planète.EstLibre(Coordonnées))
-            throw new AtterissageImpossibleException();
+        planète.SiCoordonnéesOccupées(Coordonnées, () => throw new AtterissageImpossibleException());
     }
 
     public Rover TournerADroite() => new(Orientation.SuivantHoraire, _planète, Coordonnées);
@@ -25,20 +24,22 @@ public class Rover
 
     public Rover Avancer()
     {
-        var nouvellesCoordonnées = Coordonnées + new Point(Orientation.VecteurLongitude, Orientation.VecteurLatitude);
+        var nouvellesCoordonnées = Coordonnées + Orientation.Vecteur;
+
         return SeDéplacerVers(nouvellesCoordonnées);
     }
 
     public Rover Reculer()
     {
-        var nouvellesCoordonnées = Coordonnées - new Point(Orientation.VecteurLongitude, Orientation.VecteurLatitude);
+        var nouvellesCoordonnées = Coordonnées - Orientation.Vecteur;
+
         return SeDéplacerVers(nouvellesCoordonnées);
     }
 
     private Rover SeDéplacerVers(Point coordonnées)
     {
-        if (_planète.EstLibre(coordonnées))
-            return new Rover(Orientation, _planète, coordonnées);
-        return this;
+        var rover = this;
+        _planète.SiCoordonnéesLibres(coordonnées, () => rover = new Rover(Orientation, _planète, coordonnées));
+        return rover;
     }
 }

@@ -12,11 +12,16 @@ internal class PlanèteAvecObstacle : IPlanète
     }
 
     /// <inheritdoc />
-    public Point Canoniser(Point coordonnées)
+    public Point Canoniser(Point coordonnées) => _planète.Canoniser(coordonnées);
+
+    public void SiCoordonnéesLibres(Point coordonnées, Action siLibre)
     {
-        return _planète.Canoniser(coordonnées);
+        if (_obstacle != coordonnées) siLibre();
     }
 
     /// <inheritdoc />
-    public bool EstLibre(Point coordonnées) => _obstacle != coordonnées;
+    public void SiCoordonnéesOccupées(Point coordonnées, Action siOccupées)
+    {
+        if (_obstacle == coordonnées) siOccupées();
+    }
 }

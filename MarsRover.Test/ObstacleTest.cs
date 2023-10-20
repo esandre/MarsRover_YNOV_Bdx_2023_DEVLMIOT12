@@ -9,7 +9,7 @@ public class ObstacleTest
     {
         // ETANT DONNE un obstacle sur une position
         // ET un Rover tentant d'y atterir
-        var coordonnéesObstacle = new Point(0, 0);
+        var coordonnéesObstacle = Point.Zero;
 
         // QUAND on instancie le rover
         void Act() => new RoverBuilder()
@@ -26,10 +26,10 @@ public class ObstacleTest
     public void ImpossibleDAvancerSurObstacle()
     {
         // ETANT DONNE un obstacle sur une position
-        var coordonnéesObstacle = new Point(0, 1);
+        var coordonnéesObstacle = new Point(Coordonnée.Zero, Coordonnée.Zero.Suivante);
 
         // ET un rover orienté nord, sur la case immédiatement au sud
-        var coordonnéesRover = new Point(0, 0);
+        var coordonnéesRover = Point.Zero;
         var étatInitial = new RoverBuilder()
             .Orienté(PointCardinal.Nord)
             .SituéA(coordonnéesRover)
@@ -48,10 +48,10 @@ public class ObstacleTest
     public void ImpossibleDeReculeSurObstacle()
     {
         // ETANT DONNE un obstacle sur une position
-        var coordonnéesObstacle = new Point(0, 1);
+        var coordonnéesObstacle = new Point(Coordonnée.Zero, Coordonnée.Zero.Suivante);
 
         // ET un rover orienté sud, sur la case immédiatement au sud
-        var coordonnéesRover = new Point(0, 0);
+        var coordonnéesRover = Point.Zero;
         var étatInitial = new RoverBuilder()
             .Orienté(PointCardinal.Sud)
             .SituéA(coordonnéesRover)

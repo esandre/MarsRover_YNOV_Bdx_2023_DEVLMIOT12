@@ -2,18 +2,28 @@
 
 internal class PlanèteToroïdale : IPlanète
 {
-    private readonly int _taille;
+    private readonly Point _pointMax;
 
-    public PlanèteToroïdale(uint taille)
+    private PlanèteToroïdale(Point pointMax)
     {
-        if (taille == 0) 
-            throw new ArgumentOutOfRangeException(nameof(taille));
-
-        _taille = (int) taille;
+        _pointMax = pointMax;
     }
 
-    public Point Canoniser(Point coordonnées) => coordonnées % _taille;
+    private PlanèteToroïdale()
+    {
+        var un = Coordonnée.Zero.Suivante;
+        _pointMax = new Point(un, un);
+    }
+
+    public static PlanèteToroïdale DeTailleUne => new();
+
+    public PlanèteToroïdale DeTailleSupérieure => new(_pointMax + DeTailleUne._pointMax);
+
+    public Point Canoniser(Point coordonnées) => coordonnées % _pointMax;
 
     /// <inheritdoc />
-    public bool EstLibre(Point coordonnées) => true;
+    public void SiCoordonnéesLibres(Point coordonnées, Action siLibre) => siLibre();
+
+    /// <inheritdoc />
+    public void SiCoordonnéesOccupées(Point coordonnées, Action siOccupées) { }
 }

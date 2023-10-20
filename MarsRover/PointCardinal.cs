@@ -4,10 +4,17 @@ public class PointCardinal
 {
     private readonly string _nom;
 
-    public static PointCardinal Nord { get; } = new (nameof(Nord), vecteurLatitude: 1);
-    public static PointCardinal Est { get; } = new (nameof(Est), vecteurLongitude: 1);
-    public static PointCardinal Ouest { get; } = new (nameof(Ouest), vecteurLongitude: -1);
-    public static PointCardinal Sud { get; } = new (nameof(Sud), vecteurLatitude: -1);
+    public static PointCardinal Nord { get; } 
+        = new (nameof(Nord), new Point(Coordonnée.Zero, Coordonnée.Zero.Suivante));
+
+    public static PointCardinal Est { get; } 
+        = new (nameof(Est), new Point(Coordonnée.Zero.Suivante, Coordonnée.Zero));
+
+    public static PointCardinal Ouest { get; } 
+        = new (nameof(Ouest), new Point(Coordonnée.Zero.Précédent, Coordonnée.Zero));
+
+    public static PointCardinal Sud { get; } 
+        = new (nameof(Sud), new Point(Coordonnée.Zero, Coordonnée.Zero.Précédent));
 
     internal PointCardinal SuivantHoraire
     {
@@ -29,14 +36,12 @@ public class PointCardinal
 
     internal PointCardinal SuivantAntihoraire => SuivantHoraire.SuivantHoraire.SuivantHoraire;
 
-    internal int VecteurLatitude { get; }
-    internal int VecteurLongitude { get; }
+    internal Point Vecteur { get; }
 
-    private PointCardinal(string nom, int vecteurLatitude = 0, int vecteurLongitude = 0)
+    private PointCardinal(string nom, Point vecteurDéplacement)
     {
         _nom = nom;
-        VecteurLatitude = vecteurLatitude;
-        VecteurLongitude = vecteurLongitude;
+        Vecteur = vecteurDéplacement;
     }
 
     /// <inheritdoc />
