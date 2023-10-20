@@ -35,8 +35,10 @@ public class Rover
         return SeDéplacerVers(nouvellesCoordonnées);
     }
 
-    private Rover SeDéplacerVers(Point coordonnées) 
-        => _planète.EstLibre(coordonnées) 
-            ? new Rover(Orientation, _planète, coordonnées) 
-            : this;
+    private Rover SeDéplacerVers(Point coordonnées)
+    {
+        if (_planète.EstLibre(coordonnées))
+            return new Rover(Orientation, _planète, coordonnées);
+        return this;
+    }
 }

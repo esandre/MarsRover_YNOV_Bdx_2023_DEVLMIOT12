@@ -13,12 +13,19 @@ public static class RoverInterpreter
         );
 
     public static Rover Exécuter(this Rover rover, char commande)
-        => commande switch
-           {
-               CommandeReculer => rover.Reculer(),
-               CommandeTournerADroite => rover.TournerADroite(),
-               CommandeTournerAGauche => rover.TournerAGauche(),
-               CommandeAvancer => rover.Avancer(),
-               _   => throw new ArgumentOutOfRangeException(nameof(commande), "Commandes valides : ARDG")
-           };
+    {
+        switch (commande)
+        {
+            case CommandeReculer:
+                return rover.Reculer();
+            case CommandeTournerADroite:
+                return rover.TournerADroite();
+            case CommandeTournerAGauche:
+                return rover.TournerAGauche();
+            case CommandeAvancer:
+                return rover.Avancer();
+        }
+
+        throw new ArgumentOutOfRangeException(nameof(commande));
+    }
 }
