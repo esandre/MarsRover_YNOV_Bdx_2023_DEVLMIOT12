@@ -1,4 +1,7 @@
-﻿namespace MarsRover.Test.Utilities;
+﻿using MarsRover.Exploration;
+using MarsRover.Topologie;
+
+namespace MarsRover.Test.Utilities;
 
 internal class TestPrimitives
 {

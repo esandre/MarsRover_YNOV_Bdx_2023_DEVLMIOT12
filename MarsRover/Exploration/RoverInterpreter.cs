@@ -1,4 +1,4 @@
-﻿namespace MarsRover;
+﻿namespace MarsRover.Exploration;
 
 public static class RoverInterpreter
 {
@@ -7,7 +7,7 @@ public static class RoverInterpreter
     public const char CommandeTournerADroite = 'D';
     public const char CommandeTournerAGauche = 'G';
 
-    private static readonly IDictionary<char, Func<Rover, Rover>> Commandes = 
+    private static readonly IDictionary<char, Func<Rover, Rover>> Commandes =
         new Dictionary<char, Func<Rover, Rover>>
         {
             { CommandeAvancer, rover => rover.Avancer() },
@@ -23,7 +23,7 @@ public static class RoverInterpreter
 
     public static Rover Exécuter(this Rover rover, char commande)
     {
-        if(!Commandes.ContainsKey(commande))
+        if (!Commandes.ContainsKey(commande))
             throw new ArgumentOutOfRangeException(nameof(commande));
 
         return Commandes[commande](rover);

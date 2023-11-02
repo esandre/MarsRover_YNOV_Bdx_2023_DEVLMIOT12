@@ -1,4 +1,6 @@
-﻿namespace MarsRover;
+﻿using MarsRover.Geometrie;
+
+namespace MarsRover.Planete;
 
 internal class PlanèteToroïdale : IPlanète
 {

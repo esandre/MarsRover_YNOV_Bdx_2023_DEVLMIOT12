@@ -1,17 +1,17 @@
 ﻿using System.Text;
 
-namespace MarsRover;
+namespace MarsRover.Geometrie;
 
-public record Coordonnée 
+public record Coordonnée
 {
     private Coordonnée(int Valeur)
     {
         this.Valeur = Valeur;
     }
 
-    public static Coordonnée Zero => new (0);
-    public static Coordonnée Un => new (1);
-    public static Coordonnée MoinsUn => new (-1);
+    public static Coordonnée Zero => new(0);
+    public static Coordonnée Un => new(1);
+    public static Coordonnée MoinsUn => new(-1);
 
     public Coordonnée Suivante => new(Valeur + 1);
 
@@ -23,13 +23,13 @@ public record Coordonnée
         return new Coordonnée(-Valeur);
     }
 
-    public static Coordonnée operator+(Coordonnée a, Coordonnée b) 
+    public static Coordonnée operator +(Coordonnée a, Coordonnée b)
         => new(a.Valeur + b.Valeur);
 
-    public static Coordonnée operator-(Coordonnée a, Coordonnée b) 
+    public static Coordonnée operator -(Coordonnée a, Coordonnée b)
         => new(a.Valeur - b.Valeur);
-    
-    public static Coordonnée operator%(Coordonnée a, Coordonnée b) 
+
+    public static Coordonnée operator %(Coordonnée a, Coordonnée b)
         => new(a.Valeur % b.Valeur);
 
     public static Coordonnée operator *(Coordonnée a, Coordonnée b)

@@ -1,4 +1,6 @@
-﻿namespace MarsRover;
+﻿using MarsRover.Geometrie;
+
+namespace MarsRover;
 
 public record Position(Point Coordonnées, PointCardinal Orientation)
 {

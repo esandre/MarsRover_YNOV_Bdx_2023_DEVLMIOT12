@@ -1,4 +1,6 @@
-﻿namespace MarsRover;
+﻿using MarsRover.Geometrie;
+
+namespace MarsRover.Planete;
 
 public class PlanèteBuilder
 {
@@ -13,7 +15,7 @@ public class PlanèteBuilder
 
     public PlanèteBuilder AugmenterLaTailleDeLaPlanète()
     {
-        _taille ++;
+        _taille++;
         return this;
     }
 
@@ -30,7 +32,7 @@ public class PlanèteBuilder
             planèteDeBase = planèteDeBase.DeTailleSupérieure;
 
         IPlanète planète = planèteDeBase;
-        if (_obstacle is not null) 
+        if (_obstacle is not null)
             planète = new PlanèteAvecObstacle(planète, _obstacle);
 
         return planète;

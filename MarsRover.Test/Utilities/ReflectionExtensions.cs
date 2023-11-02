@@ -1,4 +1,6 @@
-﻿namespace MarsRover.Test.Utilities;
+﻿using MarsRover.Exploration;
+
+namespace MarsRover.Test.Utilities;
 
 internal static class ReflectionExtensions
 {

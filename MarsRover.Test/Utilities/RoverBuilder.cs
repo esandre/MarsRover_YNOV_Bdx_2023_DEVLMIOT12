@@ -1,4 +1,5 @@
-﻿using Random = System.Random;
+﻿using MarsRover.Geometrie;
+using Random = System.Random;
 
 namespace MarsRover.Test.Utilities;
 

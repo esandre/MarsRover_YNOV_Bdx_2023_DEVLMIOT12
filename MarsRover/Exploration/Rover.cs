@@ -1,4 +1,7 @@
-﻿namespace MarsRover;
+﻿using MarsRover.Geometrie;
+using MarsRover.Planete;
+
+namespace MarsRover.Exploration;
 
 public class Rover
 {
@@ -25,7 +28,7 @@ public class Rover
     private Rover SeDéplacerVers(Position position)
     {
         var rover = this;
-        _planète.SiCoordonnéesLibres(position.Coordonnées, 
+        _planète.SiCoordonnéesLibres(position.Coordonnées,
             () => rover = new Rover(position, _planète)
         );
         return rover;
