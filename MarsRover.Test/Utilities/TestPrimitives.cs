@@ -1,6 +1,9 @@
-﻿namespace MarsRover.Test.Utilities;
+﻿using MarsRover.Exploration;
+using MarsRover.Topologie;
 
-internal class TestPrimitives
+namespace MarsRover.Test.Utilities;
+
+internal static class TestPrimitives
 {
     public static readonly IEnumerable<PointCardinal> PointsCardinaux = new[]
         { PointCardinal.Nord, PointCardinal.Est, PointCardinal.Sud, PointCardinal.Ouest };

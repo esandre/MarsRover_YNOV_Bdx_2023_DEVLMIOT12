@@ -1,4 +1,4 @@
-﻿namespace MarsRover;
+﻿namespace MarsRover.Exploration;
 
 public static class RoverInterpreter
 {
@@ -14,11 +14,11 @@ public static class RoverInterpreter
 
     public static Rover Exécuter(this Rover rover, char commande)
         => commande switch
-           {
-               CommandeReculer => rover.Reculer(),
-               CommandeTournerADroite => rover.TournerADroite(),
-               CommandeTournerAGauche => rover.TournerAGauche(),
-               CommandeAvancer => rover.Avancer(),
-               _   => throw new ArgumentOutOfRangeException(nameof(commande), "Commandes valides : ARDG")
-           };
+        {
+            CommandeReculer => rover.Reculer(),
+            CommandeTournerADroite => rover.TournerADroite(),
+            CommandeTournerAGauche => rover.TournerAGauche(),
+            CommandeAvancer => rover.Avancer(),
+            _ => throw new ArgumentOutOfRangeException(nameof(commande), "Commandes valides : ARDG")
+        };
 }

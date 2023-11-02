@@ -1,4 +1,8 @@
-﻿namespace MarsRover.Test.Utilities;
+﻿using MarsRover.Exploration;
+using MarsRover.Planète;
+using MarsRover.Topologie;
+
+namespace MarsRover.Test.Utilities;
 
 internal class RoverBuilder
 {

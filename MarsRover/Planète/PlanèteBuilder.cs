@@ -1,4 +1,6 @@
-﻿namespace MarsRover;
+﻿using MarsRover.Topologie;
+
+namespace MarsRover.Planète;
 
 public class PlanèteBuilder
 {
@@ -21,7 +23,7 @@ public class PlanèteBuilder
     {
         IPlanète planète = new PlanèteToroïdale(_taille);
 
-        if (_obstacle is not null) 
+        if (_obstacle is not null)
             planète = new PlanèteAvecObstacle(planète, _obstacle);
 
         return planète;

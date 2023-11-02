@@ -1,4 +1,6 @@
-﻿namespace MarsRover;
+﻿using MarsRover.Topologie;
+
+namespace MarsRover.Planète;
 
 internal class PlanèteToroïdale : IPlanète
 {
@@ -8,7 +10,7 @@ internal class PlanèteToroïdale : IPlanète
     {
         if (taille == 0) throw new ArgumentOutOfRangeException(nameof(taille));
 
-        _taille = (int) taille;
+        _taille = (int)taille;
     }
 
     public Point Canoniser(Point coordonnées) => coordonnées % _taille;

@@ -1,4 +1,5 @@
-﻿using MarsRover.Test.Utilities;
+﻿using MarsRover.Exploration;
+using MarsRover.Test.Utilities;
 
 namespace MarsRover.Test;
 

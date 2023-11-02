@@ -1,4 +1,7 @@
-﻿namespace MarsRover;
+﻿using MarsRover.Planète;
+using MarsRover.Topologie;
+
+namespace MarsRover.Exploration;
 
 public class Rover
 {
@@ -16,7 +19,7 @@ public class Rover
         Coordonnées = _planète.Canoniser(coordonnées);
         Orientation = orientation;
 
-        if(!planète.EstLibre(Coordonnées))
+        if (!planète.EstLibre(Coordonnées))
             throw new AtterissageImpossibleException();
     }
 
@@ -35,8 +38,8 @@ public class Rover
         return SeDéplacerVers(nouvellesCoordonnées);
     }
 
-    private Rover SeDéplacerVers(Point coordonnées) 
-        => _planète.EstLibre(coordonnées) 
-            ? new Rover(Orientation, _planète, coordonnées) 
+    private Rover SeDéplacerVers(Point coordonnées)
+        => _planète.EstLibre(coordonnées)
+            ? new Rover(Orientation, _planète, coordonnées)
             : this;
 }
