@@ -1,9 +1,10 @@
-﻿using MarsRover.Planète;
+﻿using System.Text;
+using MarsRover.Planète;
 using MarsRover.Topologie;
 
 namespace MarsRover.Exploration;
 
-public class Rover
+public record Rover
 {
     private readonly IPlanète _planète;
 
@@ -42,4 +43,14 @@ public class Rover
         => _planète.EstLibre(coordonnées)
             ? new Rover(Orientation, _planète, coordonnées)
             : this;
+
+    protected virtual bool PrintMembers(StringBuilder builder)
+    {
+        builder.Append(Latitude);
+        builder.Append(',');
+        builder.Append(Longitude);
+        builder.Append(',');
+        builder.Append(Orientation);
+        return true;
+    }
 }
