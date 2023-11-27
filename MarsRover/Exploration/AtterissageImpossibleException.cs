@@ -1,5 +1,3 @@
 ﻿namespace MarsRover.Exploration;
 
-public class AtterissageImpossibleException : Exception
-{
-}
+public class AtterissageImpossibleException : Exception;

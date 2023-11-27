@@ -15,4 +15,7 @@ internal static class TestPrimitives
         RoverInterpreter.CommandeTournerADroite,
         RoverInterpreter.CommandeTournerAGauche,
     };
+
+    public static IEnumerable<object[]> CommandesComplexes =>
+        new CartesianData(CommandesSimples, CommandesSimples);
 }

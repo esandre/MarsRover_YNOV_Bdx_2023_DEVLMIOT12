@@ -24,8 +24,7 @@ public class CommandesTest
         Assert.Equal(étatFinalAttendu, étatFinal, new RoverComparer());
     }
 
-    public static IEnumerable<object[]> CasCommandeComplexe => 
-        new CartesianData(TestPrimitives.CommandesSimples, TestPrimitives.CommandesSimples);
+    public static IEnumerable<object[]> CasCommandeComplexe => TestPrimitives.CommandesComplexes;
 
     [Theory]
     [MemberData(nameof(CasCommandeComplexe))]
